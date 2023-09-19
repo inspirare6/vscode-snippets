@@ -1,0 +1,71 @@
+{
+    "model template": {
+        "prefix": "model",
+        "body": [
+            "from utils.database import metadata, engine",
+            "from zdatabase.model import Model",
+            "from sqlalchemy import Table",
+            "",
+            "class $1(Model):",
+            "    __table__ = Table('$2', metadata, autoload=True, autoload_with=engine)",
+            "",
+            "    @property",
+            "    def key_map(self):",
+            "        return {",
+            "        }",
+            "",
+            "    @property",
+            "    def key_derive_map(self):",
+            "        return {",
+            "        }",
+            "",
+            "    def to_json(self):",
+            "        return super().to_json()"
+        ],
+        "description": "model template"
+    },
+    "mapper template": {
+        "prefix": "mapper",
+        "body": [
+            "$1",
+            "",
+            "class $2Mapper($3):",
+            "    @classmethod",
+            "    def make_flts(cls, **kwargs):",
+            "        return super().make_flts(**kwargs)",
+            "    ",
+            "    @classmethod",
+            "    def get_jsons(cls, **kwargs):",
+            "        return super().get_jsons(**kwargs)"
+        ],
+        "description": "mapper template"
+    },
+    "resource template": {
+        "prefix": "resource",
+        "body": [
+            "$2",
+            "from zrouter.restful import R",
+            "from typing import Optional",
+            "",
+            "class $1Resource(R, $3):",
+            "    path = '/$4'",
+            "",
+            "    @classmethod",
+            "    def get(cls, **kwargs):",
+            "        return super().get(**kwargs)",
+            "",
+            "    @classmethod",
+            "    def post(cls, **kwargs):",
+            "        return super().post(**kwargs)",
+            "",
+            "    @classmethod",
+            "    def put(cls, **kwargs):",
+            "        return super().put(**kwargs)",
+            "",
+            "    @classmethod",
+            "    def delete(cls, **kwargs):",
+            "        return super().delete(**kwargs)"
+        ],
+        "description": "resource template"
+    }
+}
